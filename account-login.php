@@ -15,6 +15,9 @@ $result = LoginToAccount($email, $password);
 
 if ($result == true) {
     $url = "cabinet.php";
+
+    setcookie("email", $email, 0, "/");
+    setcookie("password", $password, 0, "/");
 } else {
     $url = "login.html";
 }

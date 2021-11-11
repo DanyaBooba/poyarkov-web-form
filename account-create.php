@@ -15,6 +15,9 @@ $result = CreateAccount($email, $password);
 //var_dump($result);
 if ($result == true) {
     $url = "cabinet.php";
+
+    setcookie("email", $email, 0, "/");
+    setcookie("password", $password, 0, "/");
 } else {
     $url = "create.html";
 }

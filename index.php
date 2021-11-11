@@ -3,10 +3,6 @@
 $email = $_COOKIE["email"];
 $password = $_COOKIE["password"];
 
-if (empty($email) || empty($password)) {
-    header("Location: /");
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -22,11 +18,9 @@ if (empty($email) || empty($password)) {
 <body>
     <main class="main__block">
         <div id="info">
-
             <h1 class="text-center fw-bold">
-                Личный Кабинет
+                Реализация Личного кабинета
             </h1>
-
         </div>
 
         <div id="more">
@@ -41,14 +35,21 @@ if (empty($email) || empty($password)) {
             </p>
         </div>
 
-        <div id="content" class="text-center">
-            <a href="/" style="margin-right: 1rem;">
-                Главная страница</a>
-            <a href="settings.html" style="margin-right: 1rem;">
-                Настройки</a>
-            <a href="exit">
-                Выйти из Аккаунта</a>
-        </div>
+        <?php if (empty($email) || empty($password)) : ?>
+            <div id="content" class="text-center">
+                <a href="create.html" style="margin-right: 1rem;">
+                    Создать Аккаунт</a>
+                <a href="login.html" style="margin-left: 1rem;">
+                    Войти в Аккаунт</a>
+            </div>
+        <?php else : ?>
+            <div id="content" class="text-center">
+                <a href="cabinet" style="margin-right: 1rem;">
+                    Войти в Аккаунт</a>
+                <a href="exit" style="margin-right: 1rem;">
+                    Выйти из Аккаунта</a>
+            </div>
+        <?php endif; ?>
     </main>
 </body>
 

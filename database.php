@@ -2,58 +2,73 @@
 // Тут подключение к базе данных
 
 
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpassword = 'root';
-$dbdatabase = 'poyarkov';
+#Подключаем библиотеку и производим подключение
+require 'rb-mysql.php';
+R::setup('mysql:host=localhost;dbname=poyarkov', 'root', 'root');
 
-$mysqli = new mysqli($dbhost, $dbuser, $dbpassword, $dbdatabase);
-
-if ($mysqli === false) {
-    die("ERROR: Could not connect. " . $mysqli->connect_error);
+#Прекращаем выполнение, если не подключились
+if (!R::testConnection()) {
+    return "404 connection";
+    exit;
 }
 
-//$result = $mysqli->query("SELECT * FROM users");
+#Функция для базового входа
+function _BaseLogin($email, $password)
+{
+    #Находим пользователя
+    $find = R::findOne('users', 'email = ?', array($email));
+    if (!isset($find)) return "404";
 
+    #Работаем с паролем
+    $db_password = $find->password;
 
+    #Обрабатываем ошибки
+    if ($db_password != $password) return "404";
+    if (isset($find) && $db_password == $password) return $find;
 
+    #В случае непонятности
+    return "404";
+}
+
+#Функция для Регистрации
 function CreateAccount($email, $password)
 {
-    global $mysqli;
+    #Обработка длины данных
+    if (strlen($email) <= 0 || strlen($password) <= 0) return "404";
 
-    $date = date("Y-m-d H:m:s");
-    $ip = $_SERVER['REMOTE_ADDR'];
+    #Обработка существования пользователя
+    if (_BaseLogin($email, $password) != "404") return "404";
 
-    $names = "name, email, password, inputs, datetimelogin, iplastlogin";
-    $values = '"default", "' . $email . '", "' . $password . '", "[]", "' . $date . '", "' . $ip . '"';
-    $sql = 'INSERT INTO `users`(' . $names . ') VALUES (' . $values . ')';
+    #Задаем данные
+    $user = R::dispense('users');
+    $user->name = "default";
+    $user->email = $email;
+    $user->password = $password;
+    $user->inputs = "[]";
+    $user->datetimelogin = date("Y-m-d H:m:s");
+    $user->iplastlogin = $_SERVER['REMOTE_ADDR'];
 
-    $result = $mysqli->query($sql);
-    return $result;
+    #Загружаем данные и возвращаем информацию об успешном выполнении
+    R::store($user);
+    return $user;
 }
 
+#Функция для входа
 function LoginToAccount($email, $password)
 {
-    global $mysqli;
+    #Ищем аккаунт
+    $data = _BaseLogin($email, $password);
 
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = $mysqli->query($sql);
+    #Если есть ошибка
+    if ($data == "404") return "404";
 
-    if ($result->num_rows <= 0) {
-        return false;
-    }
+    #Берем IP
+    $ip = $_SERVER['REMOTE_ADDR'];
 
-    $array = mysqli_fetch_array($result);
+    #Изменяем некоторые параметры
+    $data->iplastlogin = $ip;
 
-    if ($array["password"] != $password) {
-        return false;
-    }
-
-    return true;
+    #Загружаем данные и возвращаем информацию об успешном выполнении
+    R::store($data);
+    return $data;
 }
-
-/*
-foreach ($result as $row) {
-    echo $row['name'] . "\n";
-}
-*/
