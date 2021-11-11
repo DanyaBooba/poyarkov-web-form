@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Сайт для Пояркова</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/components/index.css">
+    </head>
+    <body>
+        <main class="main__block">
+            <div id="info" class="text-center">
+                <h1 class="fw-bold" style="margin-bottom: 0">
+                    Войти в Аккаунт
+                </h1>
+                <p style="margin-top: .3rem">
+                    Войти
+                </p>
+            </div>
+
+            <div id="form" class="text-center">
+                <form action="account-login.php" method="post">
+                    <div style="margin-bottom: .5rem;">
+                        <label for="name">Email</label>
+                        <input type="text" id="name" name="email">
+                    </div>
+                    <div style="margin-bottom: .5rem;">
+                        <label for="name">Password</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+
+                    <button type="submit">Confirm</button>
+                </form>
+            </div>
+
+            <div id="links" class="text-center" style="margin-top: 2rem;">
+                <a href="/" style="margin-right: 1rem;">
+                    Вернуться назад</a>
+                <a href="create.html" style="margin-left: 1rem;">
+                    Создать аккаунт</a>
+            </div>
+        </main>
+    </body>
+</html>
