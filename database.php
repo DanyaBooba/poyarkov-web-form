@@ -34,10 +34,10 @@ function _BaseLogin($email, $password)
 function CreateAccount($email, $password)
 {
     #Обработка длины данных
-    if (strlen($email) <= 0 || strlen($password) <= 0) return "404";
+    if (strlen($email) <= 0 || strlen($password) <= 0) return false;
 
     #Обработка существования пользователя
-    if (_BaseLogin($email, $password) != "404") return "404";
+    if (_BaseLogin($email, $password) != "404") return false;
 
     #Задаем данные
     $user = R::dispense('users');
@@ -50,7 +50,7 @@ function CreateAccount($email, $password)
 
     #Загружаем данные и возвращаем информацию об успешном выполнении
     R::store($user);
-    return $user;
+    return true;
 }
 
 #Функция для входа
@@ -60,7 +60,7 @@ function LoginToAccount($email, $password)
     $data = _BaseLogin($email, $password);
 
     #Если есть ошибка
-    if ($data == "404") return "404";
+    if ($data == "404") return false;
 
     #Берем IP
     $ip = $_SERVER['REMOTE_ADDR'];
@@ -70,5 +70,23 @@ function LoginToAccount($email, $password)
 
     #Загружаем данные и возвращаем информацию об успешном выполнении
     R::store($data);
-    return $data;
+    return true;
+}
+
+#Редактирование данных
+function ChangeAccount($email, $password, $name, $new_pass)
+{
+    #Ищем аккаунт
+    $data = _BaseLogin($email, $password);
+
+    #Если есть ошибка
+    if ($data == "404") return false;
+
+    #Изменяем некоторые параметры
+    $data->name = $name;
+    $data->password = $new_pass;
+
+    #Загружаем данные и возвращаем информацию об успешном выполнении
+    R::store($data);
+    return true;
 }

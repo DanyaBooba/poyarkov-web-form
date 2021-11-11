@@ -17,6 +17,19 @@ $password = $_COOKIE["password"];
 
 <body>
     <main class="main__block">
+
+        <div class="row text-center">
+            <div class="col">
+                <div class="p-3 border bg-light">Custom column padding</div>
+            </div>
+            <div class="col">
+                <div class="p-3 border bg-light">Custom column padding</div>
+            </div>
+            <div class="col">
+                <div class="p-3 border bg-light">Custom column padding</div>
+            </div>
+        </div>
+
         <div id="info">
             <h1 class="text-center fw-bold">
                 Реализация Личного кабинета

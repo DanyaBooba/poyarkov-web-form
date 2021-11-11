@@ -7,6 +7,13 @@ if (empty($email) || empty($password)) {
     header("Location: /");
     exit;
 }
+
+require 'database.php';
+$data = _BaseLogin($email, $password);
+if ($data == "404") {
+    header("Location: /");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +36,27 @@ if (empty($email) || empty($password)) {
 
         </div>
 
+        <div id="data" class="text-center">
+            <b style="margin-right: 1rem;">
+                <?php echo $data["id"] ?>
+            </b>
+            <b style="margin-right: 1rem;">
+                <?php echo $data["name"] ?>
+            </b>
+            <b style="margin-right: 1rem;">
+                <?php echo $data["email"] ?>
+            </b>
+            <b style="margin-right: 1rem;">
+                <?php echo $data["password"] ?>
+            </b>
+            <b style="margin-right: 1rem;">
+                <?php echo $data["datetimelogin"] ?>
+            </b>
+            <b>
+                <?php echo $data["iplastlogin"] ?>
+            </b>
+        </div>
+
         <div id="more">
             <p>
                 Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот.
@@ -44,7 +72,7 @@ if (empty($email) || empty($password)) {
         <div id="content" class="text-center">
             <a href="/" style="margin-right: 1rem;">
                 Главная страница</a>
-            <a href="settings.html" style="margin-right: 1rem;">
+            <a href="settings" style="margin-right: 1rem;">
                 Настройки</a>
             <a href="exit">
                 Выйти из Аккаунта</a>
