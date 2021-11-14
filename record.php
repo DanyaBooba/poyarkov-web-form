@@ -69,11 +69,11 @@ $pages = R::getAll("SELECT * FROM pages WHERE idauthor=$id");
                         <?php echo $page["message"] ?>
                     </p>
                     <div>
-                        <a href="" style="margin-right: 1rem;">
+                        <a href="record-complete.php?id=<?php echo $page["id"] ?>" style="margin-right: 1rem;">
                             Выполнить</a>
-                        <a href="" style="margin-right: 1rem;">
+                        <a href="record-edit.php?id=<?php echo $page["id"] ?>" style="margin-right: 1rem;">
                             Редактировать</a>
-                        <a href="">
+                        <a href="record-delete.php?id=<?php echo $page["id"] ?>">
                             Удалить</a>
                     </div>
                 </div>

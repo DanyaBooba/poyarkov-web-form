@@ -108,5 +108,24 @@ function SendPost($email, $password, $postname, $postmess)
     $page->iscomplete = 0;
 
     R::store($page);
-    return "200";
+    return true;
+}
+
+#Завершить запись
+function CompletePage($email, $password, $idpage)
+{
+    $data = _BaseLogin($email, $password);
+
+    #Errors
+    if ($data == "404" || empty($idpage)) return false;
+    /*
+    $page = R::dispense('pages');
+    $page->name = strip_tags($postname);
+    $page->message = strip_tags($postmess);
+    $page->idauthor = $data->id;
+    $page->datetime = date("Y-m-d H:i:s");
+    $page->iscomplete = 0;
+*/
+    //R::store($page);
+    return true;
 }
