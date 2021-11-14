@@ -14,7 +14,7 @@ require 'database.php';
 $result = CreateAccount($email, $password);
 //var_dump($result);
 if ($result == true) {
-    $url = "cabinet.php";
+    $url = "cabinet";
 
     setcookie("email", $email, 0, "/");
     setcookie("password", $password, 0, "/");

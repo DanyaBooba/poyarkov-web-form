@@ -74,6 +74,8 @@ if ($data == "404") {
                 Главная страница</a>
             <a href="settings" style="margin-right: 1rem;">
                 Настройки</a>
+            <a href="record" style="margin-right: 1rem;">
+                Создать Запись</a>
             <a href="exit">
                 Выйти из Аккаунта</a>
         </div>
