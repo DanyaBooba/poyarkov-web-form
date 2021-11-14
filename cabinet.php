@@ -69,13 +69,15 @@ if ($data == "404") {
             </p>
         </div>
 
-        <div id="content" class="text-center">
+        <div id="links" class="text-center">
             <a href="/" style="margin-right: 1rem;">
                 Главная страница</a>
+            <a href="cabinet" style="margin-right: 1rem;">
+                Кабинет</a>
             <a href="settings" style="margin-right: 1rem;">
                 Настройки</a>
             <a href="record" style="margin-right: 1rem;">
-                Создать Запись</a>
+                Записи</a>
             <a href="exit">
                 Выйти из Аккаунта</a>
         </div>

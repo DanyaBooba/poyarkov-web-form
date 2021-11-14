@@ -90,3 +90,23 @@ function ChangeAccount($email, $password, $name, $new_pass)
     R::store($data);
     return true;
 }
+
+#Публикуем Запись
+function SendPost($email, $password, $postname, $postmess)
+{
+    $data = _BaseLogin($email, $password);
+
+    #Errors
+    if ($data == "404") return false;
+    if ((strlen($postname) < 3 || strlen($postmess) < 3) || (strlen($postname) > 350 || strlen($postmess) > 30000)) return false;
+
+    $page = R::dispense('pages');
+    $page->name = strip_tags($postname);
+    $page->message = strip_tags($postmess);
+    $page->idauthor = $data->id;
+    $page->datetime = date("Y-m-d H:i:s");
+    $page->iscomplete = 0;
+
+    R::store($page);
+    return "200";
+}

@@ -36,16 +36,17 @@ $iplastlogin = $data["iplastlogin"];
 
 <body>
     <main class="main__block">
+
         <div id="info" class="text-center">
             <h1 class="fw-bold" style="margin-bottom: 0">
-                Настройки Аккаунта
+                Личный Кабинет<span class="text-muted">/Настройки</span>
             </h1>
             <p style="margin-top: .3rem">
                 Настройки
             </p>
         </div>
 
-        <div id="form" class="text-center">
+        <div id="form" class="text-center" style="margin-bottom: 1rem">
             <form action="account-settings.php" method="post">
 
                 <div style="margin-bottom: .5rem;">
@@ -74,9 +75,17 @@ $iplastlogin = $data["iplastlogin"];
             </form>
         </div>
 
-        <div id="links" class="text-center" style="margin-top: 2rem;">
-            <a href="/cabinet">
-                Вернуться в Аккаунт</a>
+        <div id="links" class="text-center">
+            <a href="/" style="margin-right: 1rem;">
+                Главная страница</a>
+            <a href="cabinet" style="margin-right: 1rem;">
+                Кабинет</a>
+            <a href="settings" style="margin-right: 1rem;">
+                Настройки</a>
+            <a href="record" style="margin-right: 1rem;">
+                Записи</a>
+            <a href="exit">
+                Выйти из Аккаунта</a>
         </div>
     </main>
 </body>
